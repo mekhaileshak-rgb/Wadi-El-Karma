@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وادي الكرمة - Wadi El-Karma | المتجر الإلكتروني</title>
+    
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --main-green: #1b5e20;
+            --accent-gold: #c5a059;
+            --light-bg: #f8f9fa;
+            --sidebar-width: 220px;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--light-bg);
+        }
+
+        .navbar-brand { font-weight: 700; color: var(--main-green) !important; }
+
+        /* ===== HERO ===== */
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1595113334032-a39972390886?q=80&w=2070') center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-wadi {
+            background-color: var(--main-green);
+            color: white;
+            border-radius: 30px;
+            padding: 10px 25px;
+            transition: 0.3s;
+        }
+        .btn-wadi:hover {
+            background-color: #2e7d32;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ===== PRODUCT CARDS ===== */
+        .product-card {
+            border: none;
+            transition: 0.3s;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* ===== NAV LINKS ===== */
+        .nav-link { font-size: 16px; }
+        .navbar { z-index: 1050; }
+        .nav-link:hover { color: #ffc107 !important; }
+
+        .bi-truck { color: #4b5d91 !important; }
+        .text-primary { color: #4b5d91 !important; }
+
+        .dropdown-toggle::after {
+            margin-right: 0.5em;
+            vertical-align: middle;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100%;
+            background-color: #26466d;
+            padding: 1.4rem 0.9rem;
+            z-index: 1040;
+            overflow-y: auto;
+            border-radius: 0 1.5rem 1.5rem 0;
+            box-shadow: 4px 0 28px rgba(0,0,0,0.18);
+            transform: translateX(-100%);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .sidebar.sidebar-open {
+            transform: translateX(0);
+        }
+
+        .sidebar .sidebar-heading {
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            padding: 0.85rem 1rem;
+            background: rgba(255,255,255,0.08);
+            border-radius: 1rem;
+        }
+
+        .sidebar .nav-link {
+            color: #fff;
+            padding: 0.55rem 0.75rem;
+            border-radius: 1rem;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.collapsed:not(.active) {
+            color: #ffc107;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .sidebar .nav-link.active {
+            background: rgba(255,255,255,0.15);
+            color: #ffc107 !important;
+        }
+
+        .sidebar .collapse .nav-link {
+            padding-left: 1.4rem;
+        }
+
+        /* ===== SIDEBAR BACKDROP ===== */
+        .sidebar-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.35);
+            z-index: 1035;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+        .sidebar-backdrop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== SIDEBAR CLOSE BUTTON (inside sidebar) ===== */
+        .sidebar-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.35);
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            display: none;
+        }
+
+        /* ===== SIDEBAR TOGGLE (hamburger) ===== */
+        .sidebar-toggle-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(38,70,109,0.4);
+            background: #fff;
+            color: #26466d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.2s, color 0.2s;
+        }
+        .sidebar-toggle-btn:hover {
+            background: #26466d;
+            color: #fff;
+        }
+
+        /* ===== ICON CIRCLE ===== */
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f1f3f5;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.2s;
+        }
+        .icon-circle:hover { background-color: #e2e6ea; }
+
+        .icon-circle.cart-icon {
+            background-color: #4b5d91;
+            color: #fff;
+        }
+
+        /* ===== RESPONSIVE BREAKPOINTS ===== */
+
+        /* Desktop (≥ 992px): sidebar always visible, body offset */
+        @media (min-width: 992px) {
+            .sidebar {
+                transform: translateX(0);
+                border-radius: 0;
+            }
+            .sidebar-close-btn { display: none !important; }
+            .sidebar-toggle-btn { display: none !important; }
+            body { margin-left: var(--sidebar-width); }
+        }
+
+        /* Tablet (768px – 991px): sidebar hidden, toggle visible */
+        @media (max-width: 991.98px) {
+            .sidebar {
+                width: 260px;
+                border-radius: 0 1.5rem 1.5rem 0;
+                box-shadow: 8px 0 28px rgba(0,0,0,0.28);
+            }
+            .sidebar .sidebar-heading { padding-top: 3.5rem; }
+            .sidebar-close-btn { display: flex !important; }
+            .sidebar-toggle-btn { display: flex !important; }
+            .logo img { height: 50px !important; }
+        }
+        .hero-section {
+         padding-top: 100px; /* جرب الرقم ده لحد ما الكلام ينزل تحت الناف بار */
+        }
+        /* Mobile (< 576px): compact header */
+        @media (max-width: 575.98px) {
+            .sidebar { width: 85vw; max-width: 300px; }
+            .logo img { height: 42px !important; }
+            .delivery-box { display: none !important; }
+            .top-header-links a { font-size: 11px; }
+            .hero-section { height: 60vh; }
+            .hero-section h1 { font-size: 1.6rem; }
+            .hero-section p.lead { font-size: 0.9rem; }
+        }
+
+        /* Tiny (< 400px) */
+        @media (max-width: 399.98px) {
+            .icon-circle,
+            .sidebar-toggle-btn { width: 36px; height: 36px; }
+            .top-header-links { gap: 0.5rem !important; }
+            .top-header-links a { font-size: 10px; }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header class="shadow-sm" style="direction: rtl;">
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="py-2 border-bottom" style="background-color: #f8f9fa; font-size: 13px;">
+        <div class="container d-flex justify-content-end align-items-center">
+            <div class="d-flex gap-3 flex-wrap top-header-links">
+                <a href="#" class="text-secondary text-decoration-none">English</a>
+                <a href="#" class="text-secondary text-decoration-none">تواصل معنا</a>
+                <a href="#" class="text-secondary text-decoration-none d-none d-sm-inline">اخر الاخبار</a>
+                <a href="#" class="text-secondary text-decoration-none d-none d-md-inline">سياسة الاسترجاع</a>
+                <a href="#" class="text-secondary text-decoration-none d-none d-md-inline">الاسئلة الشائعة</a>
+                <a href="#" class="text-secondary text-decoration-none d-none d-lg-inline">عن وادي الكرمة</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CENTER HEADER ===== -->
+    <div class="bg-white py-3 border-bottom">
+        <div class="container d-flex flex-row-reverse justify-content-between align-items-center gap-2">
+
+            <!-- RIGHT: Icons + Sidebar Toggle -->
+            <div class="d-flex align-items-center gap-2 gap-sm-3">
+
+                <!-- Hamburger toggle (mobile/tablet only) -->
+                <button id="sidebarToggle" class="sidebar-toggle-btn" aria-label="القائمة">
+                    <i class="bi bi-list fs-5"></i>
+                </button>
+
+                <!-- Search -->
+                <div class="icon-circle">
+                    <i class="bi bi-search fs-5"></i>
+                </div>
+
+                <!-- Account -->
+                <div class="icon-circle">
+                    <i class="bi bi-person fs-5"></i>
+                </div>
+
+                <!-- Cart -->
+                <div class="position-relative">
+                    <div class="icon-circle cart-icon" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer">
+                        <i class="bi bi-cart3 fs-5"></i>
+                    </div>
+                    <span id="cart-count" class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger" style="font-size: 10px;">0</span>
+                </div>
+
+                <!-- ===== SIDEBAR ===== -->
+                <aside class="sidebar" id="mainSidebar">
+                    <button id="sidebarClose" class="btn btn-sm sidebar-close-btn">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                    <div class="sidebar-heading text-white fw-bold">القائمة الجانبية</div>
+                    <ul class="nav flex-column gap-2">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">ورقيات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link collapsed text-white" data-bs-toggle="collapse" href="#aluminiumMenu" role="button" aria-expanded="false">الومنيوم</a>
+                            <div class="collapse" id="aluminiumMenu">
+                                <ul class="nav flex-column gap-1">
+                                    <li class="nav-item"><a class="nav-link text-white" href="#">خيار 1</a></li>
+                                    <li class="nav-item">
+                                        <a class="nav-link collapsed text-white" data-bs-toggle="collapse" href="#otherTypes" role="button" aria-expanded="false">أنواع أخرى</a>
+                                        <div class="collapse" id="otherTypes">
+                                            <ul class="nav flex-column gap-1">
+                                                <li class="nav-item"><a class="nav-link text-white" href="#">خيار فرعي 1</a></li>
+                                                <li class="nav-item"><a class="nav-link text-white" href="#">خيار فرعي 2</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link text-white" href="#">خيار 2</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link collapsed text-white" data-bs-toggle="collapse" href="#packagingMenu" role="button" aria-expanded="false">تغليف</a>
+                            <div class="collapse" id="packagingMenu">
+                                <ul class="nav flex-column gap-1">
+                                    <li class="nav-item"><a class="nav-link text-white" href="#">كيس ورقي</a></li>
+                                    <li class="nav-item"><a class="nav-link text-white" href="#">كيس بلاستيك</a></li>
+                                    <li class="nav-item"><a class="nav-link text-white" href="#">علب كرتون</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link collapsed text-white" data-bs-toggle="collapse" href="#foamMenu" role="button" aria-expanded="false">فوم</a>
+                            <div class="collapse" id="foamMenu">
+                                <ul class="nav flex-column gap-1">
+                                    <li class="nav-item"><a class="nav-link text-white" href="#">فوم أبيض</a></li>
+                                    <li class="nav-item"><a class="nav-link text-white" href="#">فوم ملون</a></li>
+                                    <li class="nav-item"><a class="nav-link text-white" href="#">فوم سميك</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link collapsed text-white" data-bs-toggle="collapse" href="#plasticMenu" role="button" aria-expanded="false">بلاستيك</a>
+                            <div class="collapse" id="plasticMenu">
+                                <ul class="nav flex-column gap-1">
+                                    <li class="nav-item"><a class="nav-link text-white" href="#">أكياس بلاستيك</a></li>
+                                    <li class="nav-item"><a class="nav-link text-white" href="#">علب بلاستيك</a></li>
+                                    <li class="nav-item"><a class="nav-link text-white" href="#">أغطية بلاستيك</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link collapsed text-white" data-bs-toggle="collapse" href="#woodMenu" role="button" aria-expanded="false">خشب</a>
+                            <div class="collapse" id="woodMenu">
+                                <ul class="nav flex-column gap-1">
+                                    <li class="nav-item"><a class="nav-link text-white" href="#">صناديق خشبية</a></li>
+                                    <li class="nav-item"><a class="nav-link text-white" href="#">ألواح خشبية</a></li>
+                                    <li class="nav-item"><a class="nav-link text-white" href="#">شرائح خشبية</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </aside>
+                <!-- ===== END SIDEBAR ===== -->
+
+            </div>
+
+            <!-- LEFT: Logo + Delivery -->
+            <div class="d-flex align-items-center gap-2 gap-sm-3">
+                <div class="logo">
+                    <img src="../photos/nav/image 1.png" style="height: 60px;" alt="Logo">
+                </div>
+                <div class="delivery-box d-flex align-items-center border rounded-3 px-3 py-1 bg-light">
+                    <i class="bi bi-truck ms-2"></i>
+                    <div class="text-end">
+                        <div class="text-muted" style="font-size: 10px;">توصيل في</div>
+                        <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 14px;">
+                            القاهرة | التجمع الخامس
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</header>
+
+<!-- Sidebar Backdrop -->
+<div id="sidebarBackdrop" class="sidebar-backdrop "></div>
+
+<!-- ===== HERO ===== -->
+<section class="hero-section text-center py-5" style="margin-top: 80px;"> 
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-6 ">
+                <h1 class="display-3 fw-bold mb-4">طبيعة وادي الكرمة بين يديك</h1>
+                <p class="lead mb-5">اكتشف أجود المنتجات الطبيعية...</p>
+                <a href="#products" class="btn btn-success btn-lg shadow">تسوق الآن</a>
+            </div>
+            
+            <div class="col-12  col-md-6">
+                <img src="../photos/nav/Icon.png" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section id="products" class="container my-5 py-5">
+    <h2 class="text-center mb-5 fw-bold">أحدث المنتجات</h2>
+    <div class="row g-4">
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+            <div class="card h-100 product-card shadow-sm">
+                <img src="https://via.placeholder.com/300x300?text=Product+1" class="card-img-top" alt="Product">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-dark">زيت زيتون بكر</h5>
+                    <p class="text-success fw-bold">250 EGP</p>
+                    <button class="btn btn-outline-success rounded-pill w-100 add-to-cart-btn" data-id="1" data-name="زيت زيتون بكر" data-price="250">
+                        أضف للسلة
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+            <div class="card h-100 product-card shadow-sm">
+                <img src="https://via.placeholder.com/300x300?text=Product+2" class="card-img-top" alt="Product">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-dark">عسل سدر جبلي</h5>
+                    <p class="text-success fw-bold">450 EGP</p>
+                    <button class="btn btn-outline-success rounded-pill w-100 add-to-cart-btn" data-id="2" data-name="عسل سدر جبلي" data-price="450">
+                        أضف للسلة
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CART DRAWER ===== -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="cartDrawer">
+    <div class="offcanvas-header bg-light">
+        <h5 class="offcanvas-title fw-bold">سلة التسوق</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div id="cart-items-list">
+            <p class="text-center text-muted mt-5">السلة فارغة حالياً</p>
+        </div>
+        <div id="cart-footer" class="mt-4 d-none">
+            <hr>
+            <div class="d-flex justify-content-between mb-3 fw-bold fs-5">
+                <span>الإجمالي:</span>
+                <span><span id="cart-total">0</span> EGP</span>
+            </div>
+            <button class="btn btn-wadi w-100 py-3 fs-5 shadow">إتمام عملية الشراء</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // ===== CART LOGIC =====
+    let cart = [];
+    const cartCountEl  = document.getElementById('cart-count');
+    const cartListEl   = document.getElementById('cart-items-list');
+    const cartTotalEl  = document.getElementById('cart-total');
+    const cartFooter   = document.getElementById('cart-footer');
+
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            addToCart({
+                id:    button.dataset.id,
+                name:  button.dataset.name,
+                price: parseInt(button.dataset.price)
+            });
+        });
+    });
+
+    function addToCart(product) {
+        cart.push(product);
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        cartCountEl.innerText = cart.length;
+
+        if (cart.length === 0) {
+            cartListEl.innerHTML = '<p class="text-center text-muted mt-5">السلة فارغة حالياً</p>';
+            cartFooter.classList.add('d-none');
+            return;
+        }
+
+        cartFooter.classList.remove('d-none');
+        cartListEl.innerHTML = '';
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            total += item.price;
+            cartListEl.innerHTML += `
+                <div class="d-flex align-items-center mb-3 p-2 bg-white rounded shadow-sm">
+                    <div class="flex-grow-1">
+                        <h6 class="mb-0 fw-bold">${item.name}</h6>
+                        <small class="text-success">${item.price} EGP</small>
+                    </div>
+                    <button class="btn btn-sm text-danger" onclick="removeFromCart(${index})">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>`;
+        });
+
+        cartTotalEl.innerText = total;
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartUI();
+    }
+
+    // ===== SIDEBAR TOGGLE =====
+    const sidebar         = document.getElementById('mainSidebar');
+    const sidebarToggle   = document.getElementById('sidebarToggle');
+    const sidebarClose    = document.getElementById('sidebarClose');
+    const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
+    function openSidebar() {
+        sidebar.classList.add('sidebar-open');
+        sidebarBackdrop.classList.add('show');
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove('sidebar-open');
+        sidebarBackdrop.classList.remove('show');
+    }
+
+    sidebarToggle?.addEventListener('click', openSidebar);
+    sidebarClose?.addEventListener('click', closeSidebar);
+    sidebarBackdrop?.addEventListener('click', closeSidebar);
+</script>
+
+</body>
+</html>
