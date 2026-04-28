@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>وادي الكرمة - Wadi El-Karma | المتجر الإلكتروني</title>
     
+   
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
     
@@ -45,6 +47,211 @@
             background-color: #2e7d32;
             color: white;
             transform: translateY(-2px);
+        }
+
+        .hero-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        @media (min-width: 992px) {
+            .hero-feature-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        .hero-feature-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 18px;
+            padding: 1rem;
+            min-height: 125px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .hero-section .swiper {
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            padding: 0.5rem 0;
+            min-height: 360px;
+            max-height: 520px;
+            background: transparent;
+        }
+
+        .hero-section .swiper-wrapper {
+            align-items: center;
+            background: transparent;
+        }
+
+        .hero-section .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 18px;
+            width: 100% !important;
+            height: 100%;
+            max-height: 520px;
+        }
+
+        .hero-section .swiper-slide img {
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 520px;
+            object-fit: contain;
+            border-radius: 18px;
+            display: block;
+        }
+
+        .hero-section .swiper-button-next,
+        .hero-section .swiper-button-prev {
+            color: #fff;
+        }
+
+        .hero-section .swiper-pagination-bullet {
+            background: rgba(255,255,255,0.9);
+        }
+
+        .hero-feature-icon {
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--main-green);
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-feature-card small {
+            color: #26466d;
+            font-weight: 700;
+        }
+
+        .delivery-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            direction: rtl;
+            background: linear-gradient(180deg, rgba(255,255,255,0.99) 0%, rgba(232, 249, 238, 0.96) 100%);
+            border: 1px solid rgba(36, 70, 109, 0.14);
+            box-shadow: 0 18px 46px rgba(0, 0, 0, 0.10);
+            border-radius: 30px;
+            padding: 1rem 1.15rem;
+            gap: 1rem;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+            animation: deliveryFloat 4.4s ease-in-out infinite alternate, deliveryPulse 10s ease-in-out infinite alternate;
+        }
+
+        .delivery-box:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: rgba(27, 94, 32, 0.3);
+            box-shadow: 0 28px 62px rgba(0, 0, 0, 0.22);
+        }
+
+        .delivery-box i {
+            font-size: 1rem;
+            color: rgb(124, 25, 25);
+            background: linear-gradient(135deg, #629065, #97c49a);
+            border-radius: 50%;
+            padding: 0.95rem;
+            min-width: 20px;
+            min-height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            animation: iconPulse 2.2s ease-in-out infinite alternate, iconGlow 5.6s ease-in-out infinite alternate;
+        }
+
+        @keyframes deliveryFloat {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+            20% {
+                transform: translateY(-5px) scale(1.005);
+            }
+            40% {
+                transform: translateY(-9px) scale(1.01);
+            }
+            60% {
+                transform: translateY(-7px) scale(1.008);
+            }
+            80% {
+                transform: translateY(-4px) scale(1.003);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes deliveryPulse {
+            0%, 100% {
+                border-color: rgba(36, 70, 109, 0.12);
+                background: linear-gradient(180deg, rgba(255,255,255,0.99) 0%, rgba(232, 249, 238, 0.96) 100%);
+            }
+            50% {
+                border-color: rgba(27, 94, 32, 0.3);
+                background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(222, 245, 230, 0.98) 100%);
+            }
+        }
+
+        @keyframes iconPulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.12);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes iconGlow {
+            0%, 100% {
+                box-shadow: 0 0 0 rgba(56, 142, 60, 0);
+            }
+            50% {
+                box-shadow: 0 0 0 14px rgba(56, 142, 60, 0.08);
+            }
+        }
+
+        @keyframes iconPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 rgba(27,94,32,0);
+            }
+            50% {
+                transform: scale(1.08);
+                box-shadow: 0 0 0 6px rgba(27,94,32,0.08);
+            }
+        }
+
+        .delivery-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.18rem;
+            text-align: right;
+        }
+
+        .delivery-text .delivery-label {
+            font-size: 0.78rem;
+            color: #6c757d;
+            letter-spacing: 0.02em;
+        }
+
+        .delivery-text .delivery-location {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: #1f3f1f;
         }
 
         /* ===== PRODUCT CARDS ===== */
@@ -229,7 +436,10 @@
             .logo img { height: 42px !important; }
             .delivery-box { display: none !important; }
             .top-header-links a { font-size: 11px; }
-            .hero-section { height: 60vh; }
+            .hero-section { height: auto; padding: 4rem 0 2rem; }
+            .hero-section .swiper { min-height: 260px; max-height: 320px; }
+            .hero-section .swiper-slide { max-height: 320px; }
+            .hero-section .swiper-slide img { max-height: 320px; }
             .hero-section h1 { font-size: 1.6rem; }
             .hero-section p.lead { font-size: 0.9rem; }
         }
@@ -258,7 +468,7 @@
                 <a href="#" class="text-secondary text-decoration-none d-none d-sm-inline">اخر الاخبار</a>
                 <a href="#" class="text-secondary text-decoration-none d-none d-md-inline">سياسة الاسترجاع</a>
                 <a href="#" class="text-secondary text-decoration-none d-none d-md-inline">الاسئلة الشائعة</a>
-                <a href="#" class="text-secondary text-decoration-none d-none d-lg-inline">عن وادي الكرمة</a>
+                <a href="#" class="text-secondary text-decoration-none d-none d-lg-inline" > عن وادي الكرمة</a>
             </div>
         </div>
     </div>
@@ -298,7 +508,7 @@
                     <button id="sidebarClose" class="btn btn-sm sidebar-close-btn">
                         <i class="bi bi-x-lg"></i>
                     </button>
-                    <div class="sidebar-heading text-white fw-bold">القائمة الجانبية</div>
+                    <div class="sidebar-heading text-white fw-bold">وادي الكرمة</div>
                     <ul class="nav flex-column gap-2">
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">ورقيات</a>
@@ -372,13 +582,11 @@
                 <div class="logo">
                     <img src="photos/nav/image 1.png" style="height: 60px;" alt="Logo">
                 </div>
-                <div class="delivery-box d-flex align-items-center border rounded-3 px-3 py-1 bg-light">
-                    <i class="bi bi-truck ms-2"></i>
-                    <div class="text-end">
-                        <div class="text-muted" style="font-size: 10px;">توصيل في</div>
-                        <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 14px;">
-                            القاهرة | التجمع الخامس
-                        </div>
+                <div class="delivery-box">
+                    <i class="bi bi-truck"></i>
+                    <div class="delivery-text align-items-center">
+                        <div class="delivery-label"> توصيل في خلال يومين </div>
+                        <div class="delivery-location">القاهرة الكبرى</div>
                     </div>
                 </div>
             </div>
@@ -395,14 +603,61 @@
 <section class="hero-section text-center py-5" style="margin-top: 80px;"> 
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-12 col-md-6 ">
-                <h1 class="display-3 fw-bold mb-4">طبيعة وادي الكرمة بين يديك</h1>
-                <p class="lead mb-5">اكتشف أجود المنتجات الطبيعية...</p>
-                <a href="#products" class="btn btn-success btn-lg shadow">تسوق الآن</a>
+            <div class="col-12 col-md-6 col-lg-7">
+                <div class="container my-5">
+                    <h2 class="text-center mb-4" style="font-family: 'Cairo', sans-serif;">special Offers</h2>
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="./img/nav/الومنيوم.png" class="rounded" alt="الومنيوم">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="./img/nav/بلاستيك.png" class="rounded" alt="بلاستيك">
+                            </div>
+                             <div class="swiper-slide">
+                                <img src="./img/nav/تغليف.png" class="rounded" alt="تغليف">
+                            </div>
+                             <div class="swiper-slide">
+                                <img src="./img/nav/خشب.png" class="rounded" alt="تغليف">
+                            </div>
+                             <div class="swiper-slide">
+                                <img src="./img/nav/فوم.png" class="rounded" alt="فوم">
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="col-12  col-md-6">
-                <img src="../photos/nav/Icon.png" class="img-fluid rounded shadow">
+
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="hero-feature-grid mt-4 mt-md-0">
+                    <div class="hero-feature-card">
+                        <div class="hero-feature-icon"><i class="bi bi-basket-fill"></i></div>
+                        <a href=""><small>منتجات عضوية</small></a>
+                    </div>
+                    <div class="hero-feature-card">
+                        <div class="hero-feature-icon"><i class="bi bi-truck"></i></div>
+                        <small>توصيل سريع</small>
+                    </div>
+                    <div class="hero-feature-card">
+                        <div class="hero-feature-icon"><i class="bi bi-award"></i></div>
+                        <small>أفضل جودة</small>
+                    </div>
+                    <div class="hero-feature-card">
+                        <div class="hero-feature-icon"><i class="bi bi-calendar2-week"></i></div>
+                        <small>عروض يومية</small>
+                    </div>
+                    <div class="hero-feature-card">
+                        <div class="hero-feature-icon"><i class="bi bi-heart-fill"></i></div>
+                        <small>منتجات مفضلة</small>
+                    </div>
+                    <div class="hero-feature-card">
+                        <div class="hero-feature-icon"><i class="bi bi-geo-alt"></i></div>
+                        <small>توصيل محلي</small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -460,9 +715,33 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        speed: 600,
+        autoplay: {
+            delay: 1000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        },
+        keyboard: {
+            enabled: true,
+            onlyInViewport: true
+        }
+    });
     // ===== CART LOGIC =====
     let cart = [];
     const cartCountEl  = document.getElementById('cart-count');
